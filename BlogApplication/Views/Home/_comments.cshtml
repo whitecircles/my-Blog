@@ -1,0 +1,11 @@
+﻿@model List<BlogApplication.Models.Entites.Comment>
+
+<h3>Comments</h3>
+
+@foreach (var m in Model)
+{
+    @m.body
+    
+   <br />
+}
+

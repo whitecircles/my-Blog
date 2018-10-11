@@ -1,0 +1,17 @@
+﻿@model BlogApplication.Models.Entites.Post
+
+@using (Html.BeginForm("SubmitComment", "Home"))
+{
+    <fieldset>
+        <legend>Add New Comment</legend>
+
+        <label>Body:</label>
+        @Html.TextArea("body")<br />
+        <label>UserNumber:</label>
+        @Html.TextBox("usernumber")<br />
+        <label>Post:</label>
+        @Html.TextBox("post")<br />
+
+        <input type="submit" value="add comment" />
+    </fieldset>
+}
