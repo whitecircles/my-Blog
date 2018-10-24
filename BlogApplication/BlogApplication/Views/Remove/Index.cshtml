@@ -1,0 +1,22 @@
+﻿@model BlogApplication.Models.Entites.Post
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Remove Post</h2>
+
+@using (Html.BeginForm("RemovePost", "Remove"))
+{
+    <fieldset>
+        <legend>Remove</legend>
+
+
+        @Html.LabelFor(model => model.Id, "Id")
+        @Html.EditorFor(model => model.Id) <br />
+        <input type="submit" value="remove" />
+
+
+    </fieldset>
+}
+

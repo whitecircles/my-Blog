@@ -1,0 +1,27 @@
+﻿@model BlogApplication.Models.Entites.Post
+@{
+    ViewBag.Title = "EditPost";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>EditPost</h2>
+<u>Id: @Model.Id</u> <br />
+
+@using (Html.BeginForm("EditSubmit", "Edit"))
+{
+    @Html.Hidden("Id", Model.Id)
+    @Html.Hidden("usernumber", Model.usernumber)
+
+    @Html.LabelFor(model => model.header, "Header")
+    @Html.EditorFor(model => model.header) <br />
+
+ 
+    @Html.LabelFor(model => model.body, "Body")
+    @Html.EditorFor(model => model.body) <br />
+
+
+
+    <input type="submit" value="save" />
+}
+
+

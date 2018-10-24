@@ -1,0 +1,20 @@
+﻿@model BlogApplication.Models.Entites.Post
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+@using (Html.BeginForm("EditPost", "Edit"))
+{
+<fieldset>
+    <legend>Edit</legend>
+    
+    @Html.LabelFor(model => model.Id, "Id")
+    @Html.EditorFor(model => model.Id) <br />
+
+    <input type="submit" value="edit"/>
+</fieldset>
+}
+
