@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="Notesdb-Web.config Connection String" description="Notesdb Строка подключения в web.config, используемая приложением для доступа к базе данных." defaultValue="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\white\Documents\Visual Studio 2017\Projects\Tasks\Tasks\App_Data\Notes.mdf;Integrated Security=True" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\white\\Documents\\Visual\ Studio\ 2017\\Projects\\Tasks\\Tasks\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='Notesdb']/@connectionString" />
+  </parameter>
+</parameters>
