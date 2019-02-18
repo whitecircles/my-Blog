@@ -1,0 +1,20 @@
+﻿@model Tasks.Models.User
+@{
+    ViewBag.Title = "PersonalPage";
+}
+
+<h2>PersonalPage</h2>
+
+<h3>Welcome, @Model.Name</h3>
+
+@Html.Action("PersonalTasks", "Home", new { usernumber = Model.Id })
+
+
+
+
+
+@Html.ActionLink("add post", "Index", "Add") <br />
+
+@Html.ActionLink("remove post", "Index", "Remove") <br />
+
+@Html.ActionLink("edit post", "Index", "Edit")

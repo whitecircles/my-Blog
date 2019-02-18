@@ -1,0 +1,23 @@
+﻿ 
+    @using (Html.BeginForm("PersonalPage", "Home"))
+    {
+        <fieldset>
+            <legend>Authentification</legend>
+            <table>
+                <tr>
+                    
+                    <td><label>Login:</label></td>
+                    <td>@Html.TextBox("name")<td/>
+                </tr>
+                <tr>
+                    
+                    <td><label>Password:</label></td>
+                    <td>@Html.Password("passwrd")</td>
+                </tr>
+            </table>
+            
+            <hr />
+            <input type="submit" value="Authenticate" />
+        </fieldset>
+    }
+

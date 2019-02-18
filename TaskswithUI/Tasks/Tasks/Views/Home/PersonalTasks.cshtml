@@ -1,0 +1,18 @@
+﻿@model List<Tasks.Models.Task>
+
+<h3>Your tasks</h3>
+
+@foreach (var m in Model)
+{
+    @m.Id
+    <br />
+    @m.note
+    <br />
+    @m.isChecked
+    <br />
+    @m.description
+    <br />
+    @m.date
+    <br />
+    <hr />
+}
