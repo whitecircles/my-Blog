@@ -1,0 +1,16 @@
+﻿@model List<Tasks.Models.Task>
+
+<br />
+<h3>Task list:</h3>
+
+@foreach (var m in Model)
+{
+   
+
+    @m.note
+    <br />
+    @m.description
+    <br />
+
+    <hr />
+}

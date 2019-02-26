@@ -183,11 +183,13 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PhotoController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Photo.cs" />
     <Compile Include="Models\Task.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -230,6 +232,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\matskotest - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\matskotestaspnet - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\matskotestaspnet - Web Deploy1.pubxml" />
+    <None Include="Properties\PublishProfiles\mveronicatest - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\mveronicatest2 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\mveronicatest2 - Web Deploy1.pubxml" />
+    <None Include="Properties\PublishProfiles\Tasks20190124015139 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\Tasks20190126091132 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\Taskswithstring - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -252,8 +263,12 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\PersonalPage.cshtml" />
+    <Content Include="Views\Home\PersonalTasks.cshtml" />
+    <Content Include="Views\Home\OnError.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Views\Photo\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
@@ -12,13 +13,13 @@ namespace Tasks.Controllers
 {
     public class TaskController : ApiController
     {
-        SqlConnection conn = new SqlConnection(
-             "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\white\\Documents\\Visual Studio 2017\\Projects\\Tasks\\Tasks\\App_Data\\Notes.mdf;Integrated Security=True");
+        static string connection = ConfigurationManager.ConnectionStrings["Notesdb"].ConnectionString;
+        SqlConnection conn = new SqlConnection(connection);
 
 
         [HttpGet]
-        [Route("api/task")]
-        public JsonResult<List<Task>> GetAllNotes()
+        [Route("api/task/{id}")]
+        public JsonResult<List<Task>> GetAllNotes(int id)
         {
             SqlDataReader reader = null;
             List<Task> taskModel = new List<Task>();
@@ -28,8 +29,10 @@ namespace Tasks.Controllers
                 // 2. Open the connection
                 conn.Open();
 
-                // 3. Pass the connection to a command object
-                SqlCommand cmd = new SqlCommand("select * from Notes", conn);
+                SqlCommand cmd = new SqlCommand("select * from Notes where userId = @cId", conn);
+
+                SqlParameter nameParam = new SqlParameter("@cId", id);
+                cmd.Parameters.Add(nameParam);
 
 
                 reader = cmd.ExecuteReader();
@@ -43,8 +46,9 @@ namespace Tasks.Controllers
                     task.priority = (string)reader["priority"];
                     task.date = (string)reader["date"];
                     task.pendDate = (string)reader["pendDate"];
-                    task.userId = (int)reader["user"];
-                    
+                    task.userId = (int)reader["userId"];
+                    task.description = (string)reader["description"];
+
 
 
 
@@ -76,8 +80,8 @@ namespace Tasks.Controllers
 
         //it works
         [HttpGet]
-        [Route("api/task/add/{note}/{isChecked}/{priority}/{date}/{pendDate}/{userId}")]
-        public void InsertNote(string note, bool isChecked, string priority, string date, string pendDate, int userId)
+        [Route("api/task/add/{note}/{isChecked}/{priority}/{date}/{pendDate}/{userId}/{description}")]
+        public int InsertNote(string note, bool isChecked, string priority, string date, string pendDate, int userId, string description)
         {
             Task t = new Task();
             t.note = note;
@@ -86,8 +90,9 @@ namespace Tasks.Controllers
             t.date = date;
             t.pendDate = pendDate;
             t.userId = userId;
+            t.description = description;
 
-            string query = "insert into Notes (note, isChecked, priority, date, pendDate, userId) values (@cnote, @cisChecked, @cpriority, @cdate, @cpendDate, @cuserId)";
+            string query = "insert into Notes (note, isChecked, priority, date, pendDate, userId, description) values (@cnote, @cisChecked, @cpriority, @cdate, @cpendDate, @cuserId, @cdesc)";
             using (SqlCommand cmd = new SqlCommand(query))
             {
                 cmd.Connection = conn;
@@ -98,6 +103,7 @@ namespace Tasks.Controllers
                 cmd.Parameters.AddWithValue("@cdate", t.date);
                 cmd.Parameters.AddWithValue("@cpendDate", t.pendDate);
                 cmd.Parameters.AddWithValue("@cuserId", t.userId);
+                cmd.Parameters.AddWithValue("@cdesc", t.description);
 
 
                 cmd.ExecuteNonQuery();
@@ -106,6 +112,28 @@ namespace Tasks.Controllers
                 conn.Close();
 
             }
+
+           
+
+
+                // 2. Open the connection
+                conn.Open();
+
+                SqlCommand cmd2 = new SqlCommand("select MAX(Id) from Notes", conn);
+
+
+                int identifier = (int)cmd2.ExecuteScalar();
+
+
+
+                // 5. Close the connection
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            
+
+            return identifier;
         }
 
         //it works
@@ -132,8 +160,8 @@ namespace Tasks.Controllers
 
         //it works
         [HttpGet]
-        [Route("api/task/edit/{id}/{note}/{isChecked}/{priority}/{date}/{pendDate}/{userId}")]
-        public void EditNote(int id, string note, bool isChecked, string priority, string date, string pendDate, int userId)
+        [Route("api/task/edit/{id}/{note}/{isChecked}/{priority}/{date}/{pendDate}/{userId}/{description}")]
+        public void EditNote(int id, string note, bool isChecked, string priority, string date, string pendDate, int userId, string description)
         {
             Task t = new Task();
             t.Id = id;
@@ -143,8 +171,9 @@ namespace Tasks.Controllers
             t.date = date;
             t.pendDate = pendDate;
             t.userId = userId;
+            t.description = description;
 
-            string query = "update Notes set note = @cnote, isChecked = @cisChecked, priority = @cpriority, date = @cdate, pendDate = @cpendDate, userId =  @cuserId where Id = @cId;";
+            string query = "update Notes set note = @cnote, isChecked = @cisChecked, priority = @cpriority, date = @cdate, pendDate = @cpendDate, userId =  @cuserId, description = @cdesc where Id = @cId;";
             using (SqlCommand cmd = new SqlCommand(query))
             {
 
@@ -157,6 +186,7 @@ namespace Tasks.Controllers
                 cmd.Parameters.AddWithValue("@cdate", t.date);
                 cmd.Parameters.AddWithValue("@cpendDate", t.pendDate);
                 cmd.Parameters.AddWithValue("@cuserId", t.userId);
+                cmd.Parameters.AddWithValue("@cdesc", t.description);
 
 
                 cmd.ExecuteNonQuery();

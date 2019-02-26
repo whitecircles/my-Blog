@@ -20,5 +20,9 @@ namespace Tasks.Models
         public string pendDate { get; set; }
 
         public int userId { get; set; }
+
+        public string description { get; set; }
+
+        
     }
 }

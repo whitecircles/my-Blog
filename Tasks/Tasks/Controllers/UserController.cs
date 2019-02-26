@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
@@ -15,8 +16,8 @@ namespace Tasks.Controllers
     
     public class UserController : ApiController
     {
-        SqlConnection conn = new SqlConnection(
-             "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\white\\Documents\\Visual Studio 2017\\Projects\\Tasks\\Tasks\\App_Data\\Notes.mdf;Integrated Security=True");
+        static string connection = ConfigurationManager.ConnectionStrings["Notesdb"].ConnectionString;  
+        SqlConnection conn = new SqlConnection(connection);
        
 
         // it works
@@ -70,7 +71,7 @@ namespace Tasks.Controllers
             
 
 
-            return Json(userModel);
+            return Json(userModel); 
         }
 
         //it works
