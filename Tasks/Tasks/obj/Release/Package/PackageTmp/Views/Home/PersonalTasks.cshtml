@@ -1,16 +1,48 @@
 ﻿@model List<Tasks.Models.Task>
 
+
+<script>
+    function SomeMethod(checkboxInput, ident) {
+        event.preventDefault();
+
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("IsChecked", "TaskController")',
+            data: { newValue: checkboxInput.checked, taskId : ident },
+            success: function () {
+                alert("Saved successfully");
+            },
+            dataType: 'json',
+            error: function (textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            }
+        });
+    }
+</script>
+
 <br />
 <h3>Task list:</h3>
 
-@foreach (var m in Model)
+@foreach (var modl in Model)
 {
-   
 
-    @m.note
+    <table>
+        <tr>
+            <td>
+                
+                @Html.CheckBoxFor(m => modl.isChecked, new { @disabled = "disabled"})
+            </td>
+            <td>&nbsp</td>
+            <td>
+                @modl.note
+            </td>
+        </tr>
+    </table>
+
     <br />
-    @m.description
+    @modl.description
     <br />
+
 
     <hr />
 }

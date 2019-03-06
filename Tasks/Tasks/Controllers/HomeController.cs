@@ -21,6 +21,8 @@ namespace Tasks.Controllers
             return View();
         }
 
+        
+
         public ActionResult PersonalPage(string name, string passwrd)
         {
             User usr = new User();

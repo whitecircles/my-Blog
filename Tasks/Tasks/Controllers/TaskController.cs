@@ -18,6 +18,26 @@ namespace Tasks.Controllers
 
 
         [HttpGet]
+        [Route("api/bool/add/")]
+        public string IsChecked(bool newValue, int taskId)
+        {
+            
+            string query = "update Notes set isChecked = @cisChecked where Id = @cId;";
+            using (SqlCommand cmd = new SqlCommand(query))
+            {
+
+                cmd.Connection = conn;
+                conn.Open();
+                cmd.Parameters.AddWithValue("@cId", taskId);
+                cmd.Parameters.AddWithValue("@cisChecked", newValue);
+
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+            return "success";
+        }
+
+        [HttpGet]
         [Route("api/task/{id}")]
         public JsonResult<List<Task>> GetAllNotes(int id)
         {
